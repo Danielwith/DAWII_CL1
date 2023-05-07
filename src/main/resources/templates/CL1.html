@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CL1-OroscoGarayAronDaniel</title>
+  <link th:href="@{/styles/bootstrap/bootstrap.min.css}" rel="stylesheet" />
+  <script th:src="@{/scripts/bootstrap/bootstrap.bundle.js}" type="text/javascript"></script>
+  <script th:src="@{/scripts/jquery/jquery.js}" type="text/javascript"></script>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <header class="mb-5">
+      <h1 class="text-center">MANTENIMIENTO DE ALUMNOS</h1>
+    </header>
+    <section>
+      <button id="btnAgregar" type="button" class="btn btn-primary">Nuevo</button>
+      <div class="mt-3">
+        <table id="tblAlumno" class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Código</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Especialidad</th>
+              <th scope="col">Procedencia</th>
+              <th scope="col">Actualizar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="alumno :${listaAlumnos}">
+              <th scope="row" th:text="${alumno.idAlumno}"></th>
+              <th scope="row" th:text="${alumno.nombre}"></th>
+              <th scope="row" th:text="${alumno.apellido}"></th>
+              <th scope="row" th:text="${alumno.especialidad.nomEspecialidad}"></th>
+              <th scope="row" th:text="${alumno.proce}"></th>
+              <th scope="row"><button id="btnActualizar" type="button" class="btn btn-info"
+                th:data-idAlumno="${alumno.idAlumno}"
+                th:data-nombre="${alumno.nombre}"
+                th:data-apellido="${alumno.apellido}"
+                th:data-IdEsp="${alumno.especialidad.idEsp}"
+                th:data-proce="${alumno.proce}">Modificar</button></th>
+              <th scope="row"><button id="btnEliminar" type="button" class="btn btn-danger"
+                th:data-idAlumno="${alumno.idAlumno}"
+                th:data-nombre="${alumno.nombre}"
+                th:data-apellido="${alumno.apellido}">Eliminar</button></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="modalShow" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="txtnombre" class="form-label">Nombres</label>
+                <input type="text" class="form-control" id="txtnombre">
+              </div>
+              <div class="mb-3">
+                <label for="txtapellido" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" id="txtapellido">
+              </div>
+              <div class="mb-3">
+                <label for="cboespecialidad" class="form-label">Especialidad</label>
+                <select id="cboespecialidad" class="form-control"></select>
+              </div>
+              <div class="mb-3">
+                <label for="txtproce" class="form-label">Procedencia</label>
+                <input type="text" class="form-control" id="txtproce">
+              </div>
+              <input type="hidden" id="hddidalumno">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" id="btnGuardar" class="btn btn-primary">Guardar </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</body>
+<script th:src="@{/scripts/jsweb/alumno/frmMantAlumno.js}"
+        type="text/javascript"></script>
+</html>
